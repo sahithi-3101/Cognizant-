@@ -1,0 +1,18 @@
+@host = http://localhost:5236
+
+### Login and obtain a JWT token
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "Admin@123"
+}
+
+### Call a protected endpoint (replace {{token}} with the token from the login response)
+GET {{host}}/api/secure/profile
+Authorization: Bearer {{token}}
+
+### Call an admin-only protected endpoint
+GET {{host}}/api/secure/admin-only
+Authorization: Bearer {{token}}
